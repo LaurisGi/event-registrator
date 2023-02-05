@@ -12,6 +12,10 @@ export const attendeesReducer = (state, action) => {
             return {
                 attendees: [action.payload, ...state.attendees]
             }
+        case 'DELETE_ATTENDEE': 
+            return {
+                attendees: state.attendees.filter((a) => a.id !==action.payload.userid)
+            }
         default: 
             return state
     }
