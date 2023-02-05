@@ -33,20 +33,31 @@ app.use(express.json());
 // PASKUI PAKEISTI I APATINI
 app.get('/attendees', (req, res) => {
   
-  connection.execute('SELECT * FROM event', (err, events) => {
+  connection.execute('SELECT * FROM event ORDER BY id DESC', (err, events) => {
       res.send(events);
   });
 });
 
 app.post('/attendees', (req, res) => {
   const {name, surname, email, phone, userid} = req.body;
-  connection.query('INSERT INTO event (name, surname, email, phone, userId) VALUES (?, ?, ?,?, ?)', [name, surname, email, phone, userid], (error, results) => {
-    console.log(`User with userid:${userid} added to expenses list`);
-  });
-    connection.query('SELECT * FROM event WHERE userId=?', [userid], (error, results) => {
-      if (error) throw error;
-      res.json(results);
+  try {
+    connection.query('INSERT INTO event (name, surname, email, phone, userId) VALUES (?, ?, ?,?, ?)', [name, surname, email, phone, userid], (error, results) => {
+      console.log(`User with userid:${userid} added to event list`);
     });
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
+
+  connection.query('SELECT * FROM event ORDER BY id DESC LIMIT 1', (error, results) => {
+    if (error) throw error;
+    res.json(results[results.length -1]);
+  });
+//!! paskui atkeisti
+    // connection.query('SELECT * FROM event WHERE userId=?', [userid], (error, results) => {
+    //   if (error) throw error;
+    //   res.json(results);
+    // });
+  //!! paskui grazinti
 })
 
 //!
