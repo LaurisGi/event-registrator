@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { createConnection } = require('../db');
 
+
 const connection = createConnection();
 
 const sendErrorResponse = (res, statusCode, message) => {
@@ -164,6 +165,11 @@ const loginUser = (req, res) => {
 //       res.send({ error: 'Invalid Token' });
 //   }
 // };
+
+
+
+
+
   //! tokeno verifikacija
 module.exports = { loginUser, registerUser
   //  getAtendees 

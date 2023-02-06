@@ -1,32 +1,42 @@
 /* google font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;800&display=swap');
 
 /* layout */
 :root {
-  --primary: #1aac83;
+  --primary: #437df2;
   --error: #e7195a;
 }
 body {
-  background: #f1f1f1;
+  background: #2d2b2b;
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Nunito";
 }
 header {
-  background: #fff;
+  background: #1c1c1c;
 }
 header .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 15px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 header a {
-  color: #333;
+  color: #ded9d9;
   text-decoration: none;
 }
-.pages{
+header a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+header span {
+  color: #ded9d9;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.pages {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
@@ -39,32 +49,37 @@ header a {
   gap: 100px;
 }
 .attendees-details {
-  background: #fff;
+  background: #21201E;
   border-radius: 4px;
   margin: 20px auto;
   padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 7px rgba(0,0,0,0.05);
 }
 .attendees-details h4 {
-  margin: 0 0 10px 0;
+  margin: 0 0 5px 0;
   font-size: 1.2em;
   color: var(--primary);
 }
 .attendees-details p {
   margin: 0;
   font-size: 0.9em;
-  color: #555;
+  color: #cad4e2;
 }
 .attendees-details span {
   position: absolute;
-  top: 20px;
+  top: 10px;
   right: 20px;
   cursor: pointer;
-  background: #f1f1f1;
+  background: #1f1d1d;
   padding: 6px;
   border-radius: 50%;
-  color: #333;
+  color: #f6f0f0;
+}
+
+.attendees-details span:hover {
+  background: #f6f0f0;
+  color: #1f1d1d;
 }
 
 /* new attendee form */
@@ -73,25 +88,42 @@ label, input {
 }
 input {
   padding: 10px;
-  margin-top: 10px;
+  margin-top: 15px;
   margin-bottom: 20px;
+  background-color: #1c1c1c;
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid #5a5757;
   border-radius: 4px;
   box-sizing: border-box;
 }
+input, select, textarea{
+  color: #ece2e2;
+}
+
 form button {
-  background: var(--primary);
+  background: #21201E;
   border: 0;
   color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
+  padding: 10px 20px;
+  font-family: "Nunito";
   border-radius: 4px;
+  border: 1px solid #ded9d9;
   cursor: pointer;
+  margin-bottom: 15px;
 }
+
+.create {
+  color: #ded9d9;
+}
+
+form button:hover {
+  background-color: #f6f0f0;
+  color: #1c1c1c;
+}
+
 div.error {
   padding: 10px;
-  background: #ffefef;
+  background: #1c1c1c;
   border: 1px solid var(--error);
   color: var(--error);
   border-radius: 4px;
@@ -107,17 +139,22 @@ nav {
   align-items: center;
 }
 nav a, nav button {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 nav button {
-  background: #fff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
+  background: #1c1c1c;
+  color: #568af3;
+  border: 2px solid #568af3;
   padding: 6px 10px;
   border-radius: 4px;
-  font-family: "Poppins";
+  font-family: "Nunito";
   cursor: pointer;
   font-size: 1em;
+}
+
+nav button:hover {
+  color: #e7195a;
+  border-color: #e7195a;
 }
 
 /* auth forms */
@@ -125,7 +162,21 @@ form.signup, form.login {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
-  background: #fff;
+  background: #21201E;
   border-radius: 4px;
 }
+form.signup h3 , form.login h3 {
+  color: #ded9d9;
+}
+form.signup label , form.login label {
+  color: #ded9d9;
+}
+form.signup button , form.login button {
+  color: #ded9d9;
+  background-color: #1c1c1c;
+}
 
+form.signuo button:hover, form.login button:hover {
+  background-color: #ece2e2;
+  color: #1c1c1c;
+}

@@ -2,9 +2,8 @@ import { useAttendeesContext } from '../hooks/useAttendeesContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 const AttendeesDetails = ({ attendee }) => {
-    const {dispatch } = useAttendeesContext()
+    const { dispatch } = useAttendeesContext()
     const { user } = useAuthContext();
-
 
 const handleClick = async () => {
   if (!user) {
@@ -26,12 +25,13 @@ const handleClick = async () => {
 
   return (
     <div className='attendees-details'>
-        <h4><strong>Name:</strong>{attendee.name}</h4>
-        <p><strong>Name:</strong>{attendee.name}</p>
-        <p><strong>Surname:</strong>{attendee.surname}</p>
-        <p><strong>Email:</strong>{attendee.email}</p>
-        <p><strong>Phone:</strong>{attendee.phone}</p>
+      <div>
+        <h4><strong>Email: </strong>{attendee.email}</h4>
+        <p><strong>Name: </strong>{attendee.name}</p>
+        <p><strong>Surname: </strong>{attendee.surname}</p>
+        <p><strong>Phone: </strong>{attendee.phone}</p>
         <span className='material-symbols-outlined' onClick={handleClick}>delete</span>
+      </div>
     </div>
   )
 }
