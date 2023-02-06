@@ -10,11 +10,11 @@ export const attendeesReducer = (state, action) => {
             }
         case 'CREATE_ATTENDEE':
             return {
-                attendees: [action.payload, ...state.attendees]
+                attendees: action.payload
             }
         case 'DELETE_ATTENDEE': 
             return {
-                attendees: state.attendees.filter((a) => a.id !==action.payload.userid)
+                attendees: action.payload
             }
         default: 
             return state

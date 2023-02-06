@@ -5,7 +5,8 @@ const AttendeesDetails = ({ attendee }) => {
 
 
 const handleClick = async () => {
-  const response = await fetch('/atendees' + attendee.id, {
+  if (window.confirm('Do you really want to delete this attendee?')) {
+  const response = await fetch('http://localhost:8000/attendees/' + attendee.id, {
     method: 'DELETE'
   })
   const json = await response.json()
@@ -13,7 +14,7 @@ const handleClick = async () => {
   if (response.ok) {
     dispatch({type: 'DELETE_ATTENDEE', payload: json})
   }
-}
+}}
 
   return (
     <div className='attendees-details'>
@@ -22,7 +23,7 @@ const handleClick = async () => {
         <p><strong>Surname:</strong>{attendee.surname}</p>
         <p><strong>Email:</strong>{attendee.email}</p>
         <p><strong>Phone:</strong>{attendee.phone}</p>
-        <span onClick={handleClick}>delete</span>
+        <span className='material-symbols-outlined' onClick={handleClick}>delete</span>
     </div>
   )
 }

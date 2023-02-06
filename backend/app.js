@@ -48,9 +48,9 @@ app.post('/attendees', (req, res) => {
     res.status(400).json({error: error.message})
   }
 
-  connection.query('SELECT * FROM event ORDER BY id DESC LIMIT 1', (error, results) => {
+  connection.query('SELECT * FROM event ORDER BY id DESC', (error, results) => {
     if (error) throw error;
-    res.json(results[results.length -1]);
+    res.json(results);
   });
 //!! paskui atkeisti
     // connection.query('SELECT * FROM event WHERE userId=?', [userid], (error, results) => {
@@ -87,13 +87,16 @@ app.delete('/attendees/:id', (req, res) => {
 
   connection.execute(
       'DELETE FROM event WHERE id=? AND userid=?',
-      [id, userid],
+      // [id, userid], nuimti hardcode
+      [id, '12'],
       () => {
           connection.execute(
-              'SELECT * FROM event WHERE userId=?', 
-              [userid], 
-              (err, expenses) => {
-                  res.send(expenses);
+              'SELECT * FROM event', 
+              // 'SELECT * FROM event WHERE userId=?', 
+              // [userid],  nuimti hardcode
+              ['12'], 
+              (err, attendees) => {
+                  res.send(attendees);
               }
           )
       }
