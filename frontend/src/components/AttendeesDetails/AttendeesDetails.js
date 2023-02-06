@@ -1,13 +1,21 @@
 import { useAttendeesContext } from '../hooks/useAttendeesContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const AttendeesDetails = ({ attendee }) => {
     const {dispatch } = useAttendeesContext()
+    const { user } = useAuthContext();
 
 
 const handleClick = async () => {
+  if (!user) {
+    return 
+  } 
   if (window.confirm('Do you really want to delete this attendee?')) {
   const response = await fetch('http://localhost:8000/attendees/' + attendee.id, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
   })
   const json = await response.json()
 

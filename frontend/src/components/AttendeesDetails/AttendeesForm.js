@@ -1,25 +1,34 @@
 import React, { useState } from 'react'
 import { useAttendeesContext } from '../hooks/useAttendeesContext'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const AttendeesForm = () => {
   const {dispatch } = useAttendeesContext();
-    const [name, setName] = useState('')
-    const [surname, setSurname] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
-    const [userId, setUserId] = useState('')
-    const [error, setError] = useState(null)
-    const [emptyFields, setEmptyFields] = useState([])
+  const { user } = useAuthContext();
+
+  const [name, setName] = useState('')
+  const [surname, setSurname] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  // const [userId, setUserId] = useState('')
+  const [error, setError] = useState(null)
+  const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const attendee = {name, surname, email, phone, userid: userId}
+        if (!user) {
+          setError('You must be logged in')
+          return
+        }
+
+        const attendee = {name, surname, email, phone, userid: user.id}
         const response = await fetch('http://localhost:8000/attendees', {
             method: 'POST',
             body: JSON.stringify(attendee),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         })
         const json = await response.json();
@@ -28,11 +37,11 @@ const AttendeesForm = () => {
             setError(json.message)
         }
         if (response.ok) {
-            setName('')
-            setSurname('')
-            setEmail('')
-            setPhone('')
-            setUserId('')
+            // setName('')
+            // setSurname('')
+            // setEmail('')
+            // setPhone('')
+            // setUserId('')
             setError(null)
             console.log('New attedee added', json);
             dispatch({type: 'CREATE_ATTENDEE', payload: json})
@@ -73,13 +82,13 @@ const AttendeesForm = () => {
       value={phone}
       // className={emptyFields.includes('phone') ? 'error' : ''}
     />
-    <label>Atendee Id:</label>
+    {/* <label>Atendee Id:</label>
     <input 
       type="number"
       onChange={(e) => setUserId(e.target.value)}
       value={userId}
       // className={emptyFields.includes('atendee') ? 'error' : ''}
-    />
+    /> */}
 
     <button>Add Attendee</button>
     {error && <div className="error">{error}</div>}
