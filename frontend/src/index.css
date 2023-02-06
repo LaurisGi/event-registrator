@@ -176,7 +176,7 @@ form.signup button , form.login button {
   background-color: #1c1c1c;
 }
 
-form.signuo button:hover, form.login button:hover {
+form.signup button:hover, form.login button:hover {
   background-color: #ece2e2;
   color: #1c1c1c;
 }
