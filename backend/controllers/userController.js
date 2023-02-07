@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { createConnection } = require('../db');
 
-
 const connection = createConnection();
 
 const sendErrorResponse = (res, statusCode, message) => {

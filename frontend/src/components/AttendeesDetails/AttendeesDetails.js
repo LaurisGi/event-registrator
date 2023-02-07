@@ -1,5 +1,6 @@
 import { useAttendeesContext } from '../hooks/useAttendeesContext'
 import { useAuthContext } from '../hooks/useAuthContext'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const AttendeesDetails = ({ attendee }) => {
     const { dispatch } = useAttendeesContext()
@@ -30,6 +31,7 @@ const handleClick = async () => {
         <p><strong>Name: </strong>{attendee.name}</p>
         <p><strong>Surname: </strong>{attendee.surname}</p>
         <p><strong>Phone: </strong>{attendee.phone}</p>
+        <p>{formatDistanceToNow(new Date(attendee.timestamp), { addSuffix: true })}</p>
         <span className='material-symbols-outlined' onClick={handleClick}>delete_forever</span>
       </div>
     </div>

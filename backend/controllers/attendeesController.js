@@ -33,7 +33,6 @@ const connection = createConnection();
     
         try {
         connection.query('INSERT INTO event (name, surname, email, phone, userid) VALUES (?, ?, ?, ?, ?)', [name, surname, email, phone, userid], (error, results) => {
-            console.log(`User with userid:${userid} added to event list`);
         });
         } catch (error) {
         res.status(400).json({error: error.message})

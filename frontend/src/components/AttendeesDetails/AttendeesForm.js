@@ -51,40 +51,40 @@ const AttendeesForm = () => {
 
   return (
     <form className="create" onSubmit={handleSubmit}>
-    <h3>Add a New Attendee</h3>
+      <h3>Add a New Attendee</h3>
 
-    <label>Name:</label>
-    <input 
-      type="text"
-      onChange={(e) => setName(e.target.value)}
-      value={name}
-      className={emptyFields.includes('name') ? 'error' : ''}
-    />
+      <label>Name:</label>
+      <input 
+        type="text"
+        onChange={(e) => setName(e.target.value)}
+        value={name}
+        className={emptyFields.includes('name') ? 'error' : ''}
+      />
 
-    <label>Surname:</label>
-    <input 
-      type="text"
-      onChange={(e) => setSurname(e.target.value)}
-      value={surname}
-      className={emptyFields.includes('surname') ? 'error' : ''}
-    />
-    <label>Email:</label>
-    <input 
-      type="text"
-      onChange={(e) => setEmail(e.target.value)}
-      value={email}
-      className={emptyFields.includes('email') ? 'error' : ''}
-    />
+      <label>Surname:</label>
+      <input 
+        type="text"
+        onChange={(e) => setSurname(e.target.value)}
+        value={surname}
+        className={emptyFields.includes('surname') ? 'error' : ''}
+      />
+      <label>Email:</label>
+      <input 
+        type="text"
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+        className={emptyFields.includes('email') ? 'error' : ''}
+      />
 
-    <label>Phone:</label>
-    <input 
-      type="number"
-      onChange={(e) => setPhone(e.target.value)}
-      value={phone}
-      className={emptyFields.includes('phone') ? 'error' : ''}
-    />
-    <button>Add Attendee</button>
-    {error && <div className="error">{error}</div>}
+      <label>Phone:</label>
+      <input 
+        type="number"
+        onChange={(e) => setPhone(e.target.value)}
+        value={phone}
+        className={emptyFields.includes('phone') ? 'error' : ''}
+      />
+      <button>Add Attendee</button>
+      {error && <div className="error">{error}</div>}
   </form>
   )
 }

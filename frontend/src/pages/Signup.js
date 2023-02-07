@@ -50,7 +50,6 @@ import { Link } from 'react-router-dom';
                 onChange={(e)=> setPassword(e.target.value)}
                 value={password}
             />
-
                 {success && <div className='success'><Link to='/login'>{success}</Link></div>}
                 {error && <div className='error'>{error}</div>}
             <button disabled={isLoading}>Register</button>
