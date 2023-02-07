@@ -30,7 +30,7 @@ const handleClick = async () => {
         <p><strong>Name: </strong>{attendee.name}</p>
         <p><strong>Surname: </strong>{attendee.surname}</p>
         <p><strong>Phone: </strong>{attendee.phone}</p>
-        <span className='material-symbols-outlined' onClick={handleClick}>delete</span>
+        <span className='material-symbols-outlined' onClick={handleClick}>delete_forever</span>
       </div>
     </div>
   )

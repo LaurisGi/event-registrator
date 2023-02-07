@@ -10,7 +10,6 @@ const AttendeesForm = () => {
   const [surname, setSurname] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  // const [userId, setUserId] = useState('')
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
 
@@ -34,7 +33,8 @@ const AttendeesForm = () => {
         const json = await response.json();
 
         if(!response.ok) {
-            setError(json.message)
+            setError(json.error)
+            setEmptyFields(json.emptyFields)
         }
         if (response.ok) {
             // setName('')
@@ -42,6 +42,7 @@ const AttendeesForm = () => {
             // setEmail('')
             // setPhone('')
             // setUserId('')
+            setEmptyFields([])
             setError(null)
             console.log('New attedee added', json);
             dispatch({type: 'CREATE_ATTENDEE', payload: json})
@@ -57,7 +58,7 @@ const AttendeesForm = () => {
       type="text"
       onChange={(e) => setName(e.target.value)}
       value={name}
-      // className={emptyFields.includes('name') ? 'error' : ''}
+      className={emptyFields.includes('name') ? 'error' : ''}
     />
 
     <label>Surname:</label>
@@ -65,14 +66,14 @@ const AttendeesForm = () => {
       type="text"
       onChange={(e) => setSurname(e.target.value)}
       value={surname}
-      // className={emptyFields.includes('surname') ? 'error' : ''}
+      className={emptyFields.includes('surname') ? 'error' : ''}
     />
     <label>Email:</label>
     <input 
       type="text"
       onChange={(e) => setEmail(e.target.value)}
       value={email}
-      // className={emptyFields.includes('email') ? 'error' : ''}
+      className={emptyFields.includes('email') ? 'error' : ''}
     />
 
     <label>Phone:</label>
@@ -80,16 +81,8 @@ const AttendeesForm = () => {
       type="number"
       onChange={(e) => setPhone(e.target.value)}
       value={phone}
-      // className={emptyFields.includes('phone') ? 'error' : ''}
+      className={emptyFields.includes('phone') ? 'error' : ''}
     />
-    {/* <label>Atendee Id:</label>
-    <input 
-      type="number"
-      onChange={(e) => setUserId(e.target.value)}
-      value={userId}
-      // className={emptyFields.includes('atendee') ? 'error' : ''}
-    /> */}
-
     <button>Add Attendee</button>
     {error && <div className="error">{error}</div>}
   </form>

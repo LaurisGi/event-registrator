@@ -1,10 +1,10 @@
 import { useState } from 'react'
-// import { useAuthContext } from './useAuthContext'
 
     export const useSignup = () => {
         const [error, setError] = useState(null)
+        const [success, setSucces] = useState(null)
         const [isLoading, setIsLoading] = useState(null)
-        // const { dispatch } = useAuthContext()
+
 
         const signup = async (name, surname, email, password) => {
             setIsLoading(true)
@@ -19,12 +19,13 @@ import { useState } from 'react'
             if(!response.ok) {
                 setIsLoading(false)
                 setError(json.message)
+                setSucces(null)
             }
             if (response.ok) {
-                // dispatch({type: 'LOGIN', payload: json})
-                setError(json.message)
+                setSucces(json.message)
                 setIsLoading(false);
+                setError(null)
             }
         }
-        return { signup, isLoading, error }
+        return { signup, isLoading, error, success }
     }

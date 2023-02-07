@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
 import { useLogin } from '../components/hooks/useLogin';
-import { Link } from 'react-router-dom';
 
 
     const Login = () => {
@@ -25,7 +24,7 @@ import { Link } from 'react-router-dom';
                 onChange={(e)=> setEmail(e.target.value)}
                 value={email}
             />
-            <label>Email</label>
+            <label>Password</label>
             <input
                 required
                 type="password"
@@ -35,7 +34,6 @@ import { Link } from 'react-router-dom';
                 {error && <div className='error'>{error}</div>}
             <button disabled={isLoading}>Log in</button>
         </form>
-        <Link to="/login">Login</Link>
         </>
       )
     }
