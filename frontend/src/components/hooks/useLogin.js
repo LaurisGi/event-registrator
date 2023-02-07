@@ -21,7 +21,6 @@ import { useAuthContext } from './useAuthContext'
                 setError(json.message)
             }
             if (response.ok) {
-                // save the user to json storage
                 localStorage.setItem('user', JSON.stringify(json))
                 dispatch({type: 'LOGIN',  payload: json})
                 setIsLoading(false);
