@@ -19,14 +19,11 @@ import { useLogin } from '../components/hooks/useLogin';
             <h3>Log in</h3>
             <label>Email</label>
             <input
-                required
-                type="email"
                 onChange={(e)=> setEmail(e.target.value)}
                 value={email}
             />
             <label>Password</label>
             <input
-                required
                 type="password"
                 onChange={(e)=> setPassword(e.target.value)}
                 value={password}

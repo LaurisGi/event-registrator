@@ -11,6 +11,19 @@ const sendErrorResponse = (res, statusCode, message) => {
 
 const loginUser = (req, res) => {
   const { email, password } = req.body;
+
+      // Empty fields validation
+      if (!email || !password) {
+        res.status(400).send({ message: 'Please fill all the fields' });
+        return;
+      }
+
+            // Email validation
+      if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        res.status(400).send({ message: 'Invalid email address' });
+        return;
+      }
+
   connection.query(
     `SELECT * FROM users WHERE email = '${email}'`,
     (error, result) => {
@@ -37,6 +50,19 @@ const loginUser = (req, res) => {
 
   const registerUser = (req, res) =>  {
     const { name, surname, email, password } = req.body;
+
+    // Empty fields validation
+    if (!name || !surname || !email || !password) {
+      res.status(400).send({ message: 'Please fill all the fields' });
+      return;
+    }
+
+    // Email validation
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      res.status(400).send({ message: 'Invalid email address' });
+      return;
+    }
+
     connection.execute(
       'SELECT email FROM users WHERE email = ?',
       [email],
