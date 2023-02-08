@@ -37,11 +37,10 @@ const AttendeesForm = () => {
             setEmptyFields(json.emptyFields)
         }
         if (response.ok) {
-            // setName('')
-            // setSurname('')
-            // setEmail('')
-            // setPhone('')
-            // setUserId('')
+            setName('')
+            setSurname('')
+            setEmail('')
+            setPhone('')
             setEmptyFields([])
             setError(null)
             console.log('New attedee added', json);

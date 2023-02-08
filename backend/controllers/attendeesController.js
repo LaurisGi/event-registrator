@@ -12,6 +12,7 @@ const connection = createConnection();
 
     const createAttendee = (req, res) => {
         const {name, surname, email, phone, userid} = req.body;
+
     
         let emptyFields =[]
         if(!name) {
@@ -30,7 +31,13 @@ const connection = createConnection();
         if(emptyFields.length > 0) {
         return res.status(400).json({error: 'Please fill all the fields', emptyFields})
         }
-    
+
+        // Email validation
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            emptyFields.push('email');
+            return res.status(400).json({ error: 'Its not an Email adress', emptyFields });
+        }
+        
         try {
         connection.query('INSERT INTO event (name, surname, email, phone, userid) VALUES (?, ?, ?, ?, ?)', [name, surname, email, phone, userid], (error, results) => {
         });

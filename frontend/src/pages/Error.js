@@ -20,7 +20,7 @@ const { remove } = useCornify({
       }}>
       <h1>ERROR404</h1>
       <h2>The page you looking for is not found</h2>
-      <h3>Type this code secret code: ↑ ↓ and click Enter</h3>
+      <h3>Type this code secret code: ↑ ↑ and click Enter</h3>
       <button onClick={() => remove()}>Remove</button>
     </div>
   )
