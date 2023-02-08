@@ -52,14 +52,27 @@ const loginUser = (req, res) => {
     const { name, surname, email, password } = req.body;
 
     // Empty fields validation
-    if (!name || !surname || !email || !password) {
-      res.status(400).send({ message: 'Please fill all the fields' });
-      return;
+    let emptyFields =[]
+    if(!name) {
+    emptyFields.push('name')
     }
+    if(!surname) {
+    emptyFields.push('surname')
+    }
+    if(!email) {
+    emptyFields.push('email')
+    }
+    if(!password) {
+    emptyFields.push('password')
+    }
+
+    if(emptyFields.length > 0) {
+      return res.status(400).json({error: 'Please fill all the fields', emptyFields})
+      }
 
     // Email validation
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      res.status(400).send({ message: 'Invalid email address' });
+      res.status(400).send({ error: 'Invalid email address' });
       return;
     }
 
@@ -70,7 +83,7 @@ const loginUser = (req, res) => {
         if (err) {
           sendErrorResponse(res, 500, 'There was a problem registering, please try again later');
         } else if (results.length > 0) {
-          res.status(400).send({ message: 'Email already exists' });
+          res.status(400).send({ error: 'Email already exists' });
         } else {
           const hashedPassword = bcrypt.hashSync(password, 12);
           connection.execute(

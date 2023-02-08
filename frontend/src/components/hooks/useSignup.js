@@ -4,6 +4,7 @@ import { useState } from 'react'
         const [error, setError] = useState(null)
         const [success, setSucces] = useState(null)
         const [isLoading, setIsLoading] = useState(null)
+        const [emptyFields, setEmptyfields] = useState([]);
 
 
         const signup = async (name, surname, email, password) => {
@@ -18,14 +19,16 @@ import { useState } from 'react'
             const json = await response.json()
             if(!response.ok) {
                 setIsLoading(false)
-                setError(json.message)
+                setEmptyfields(json.emptyFields ? json.emptyFields : [] )
+                setError(json.error)
                 setSucces(null)
             }
             if (response.ok) {
                 setSucces(json.message)
                 setIsLoading(false);
                 setError(null)
+                setEmptyfields([])
             }
         }
-        return { signup, isLoading, error, success }
+        return { signup, isLoading, error, success, emptyFields }
     }
