@@ -1,13 +1,39 @@
-import React from 'react'
+import { useAttendeesContext } from '../hooks/useAttendeesContext'
+import { useAuthContext } from '../hooks/useAuthContext'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const AttendeesDetails = ({attendees}) => {
+const AttendeesDetails = ({ attendee }) => {
+    const { dispatch } = useAttendeesContext()
+    const { user } = useAuthContext();
+
+const handleClick = async () => {
+  if (!user) {
+    return 
+  } 
+  if (window.confirm('Do you really want to delete this attendee?')) {
+  const response = await fetch('http://localhost:8000/attendees/' + attendee.id, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
+  })
+  const json = await response.json()
+
+  if (response.ok) {
+    dispatch({type: 'DELETE_ATTENDEE', payload: json})
+  }
+}}
+
   return (
     <div className='attendees-details'>
-        <h4><strong>Name:</strong>{attendees.name}</h4>
-        <p><strong>Name:</strong>{attendees.name}</p>
-        <p><strong>Surname:</strong>{attendees.surname}</p>
-        <p><strong>Email:</strong>{attendees.email}</p>
-        <p><strong>Phone:</strong>{attendees.phone}</p>
+      <div>
+        <h4><strong>Email: </strong>{attendee.email}</h4>
+        <p><strong>Name: </strong>{attendee.name}</p>
+        <p><strong>Surname: </strong>{attendee.surname}</p>
+        <p><strong>Phone: </strong>{attendee.phone}</p>
+        <p>{formatDistanceToNow(new Date(attendee.timestamp), { addSuffix: true })}</p>
+        <span className='material-symbols-outlined' onClick={handleClick}>delete_forever</span>
+      </div>
     </div>
   )
 }
