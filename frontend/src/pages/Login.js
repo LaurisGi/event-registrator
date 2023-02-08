@@ -6,7 +6,7 @@ import { useLogin } from '../components/hooks/useLogin';
     const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login, error, isLoading } = useLogin();
+    const { login, error, isLoading, emptyFields} = useLogin();
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -21,12 +21,14 @@ import { useLogin } from '../components/hooks/useLogin';
             <input
                 onChange={(e)=> setEmail(e.target.value)}
                 value={email}
+                className={emptyFields.includes('email') ? 'error' : ''}
             />
             <label>Password</label>
             <input
                 type="password"
                 onChange={(e)=> setPassword(e.target.value)}
                 value={password}
+                className={emptyFields.includes('password') ? 'error' : ''}
             />
                 {error && <div className='error'>{error}</div>}
             <button disabled={isLoading}>Log in</button>

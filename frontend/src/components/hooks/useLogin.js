@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
 
     export const useLogin = () => {
-        const [error, setError] = useState(null)
-        const [isLoading, setIsLoading] = useState(null)
+        const [error, setError] = useState(null);
+        const [isLoading, setIsLoading] = useState(null);
         const { dispatch } = useAuthContext();
+        const [emptyFields, setEmptyfields] = useState([]);
 
         const login = async (email, password) => {
             setIsLoading(true)
@@ -18,13 +19,15 @@ import { useAuthContext } from './useAuthContext'
             const json = await response.json()
             if(!response.ok) {
                 setIsLoading(false)
-                setError(json.message)
+                setEmptyfields(json.emptyFields ? json.emptyFields : [] )
+                setError(json.error)
             }
             if (response.ok) {
                 localStorage.setItem('user', JSON.stringify(json))
                 dispatch({type: 'LOGIN',  payload: json})
                 setIsLoading(false);
+                setEmptyfields([])
             }
         }
-        return { login, isLoading, error }
+        return { login, isLoading, error, emptyFields }
     }

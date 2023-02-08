@@ -4,8 +4,8 @@ const { createConnection } = require('../db');
 
 const connection = createConnection();
 
-const sendErrorResponse = (res, statusCode, message) => {
-    return res.status(statusCode).json({ message });
+const sendErrorResponse = (res, statusCode, error) => {
+    return res.status(statusCode).json({ error });
   };
 
 
@@ -13,14 +13,20 @@ const loginUser = (req, res) => {
   const { email, password } = req.body;
 
       // Empty fields validation
-      if (!email || !password) {
-        res.status(400).send({ message: 'Please fill all the fields' });
-        return;
+      let emptyFields =[]
+      if(!email) {
+      emptyFields.push('email')
       }
+      if(!password) {
+      emptyFields.push('password')
+      }
+      if(emptyFields.length > 0) {
+        return res.status(400).json({error: 'Please fill all the fields', emptyFields})
+        }
 
             // Email validation
       if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-        res.status(400).send({ message: 'Invalid email address' });
+        res.status(400).send({ error: 'Invalid email address' });
         return;
       }
 
