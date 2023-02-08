@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import { Error } from './pages/Error';
 
 
 
@@ -28,6 +29,10 @@ function App() {
           <Route
           path='/signup'
           element={!user ? <Signup /> : <Navigate to="/"/>}
+          />
+          <Route
+          path='*'
+          element={<Error />}
           />
         </Routes>
       </div>
